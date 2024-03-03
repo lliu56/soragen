@@ -27,7 +27,7 @@ function PresetTags() {
     <div>
       {/* inital tag options */}
       <h2 className="pb-2 mb-2 font-mono">Preset tags </h2>
-      <div className="flex justify-center items-center flex-col max-w-md pb-4 mb-4">
+      <div className="flex justify-center items-start flex-col pb-4 mb-4">
         <div className="flex flex-wrap gap-2">
           {tagOptions.map((tag, index) => (
             <span
@@ -43,7 +43,7 @@ function PresetTags() {
       {/* selected tags */}
 
       <h2 className="pb-2 mb-2 font-mono">Selected tags </h2>
-      <div className="flex justify-center items-start border-2 border-gray-300 rounded-sm flex-col max-w-md p-4 mb-4">
+      <div className="flex justify-center items-start border-2 border-gray-300 rounded-sm flex-col p-4 mb-4">
         <div className="flex flex-wrap gap-2">
           {selectedTags.map((tag, index) => (
             <span

@@ -24,9 +24,9 @@ import { ToastContainer } from "react-toastify";
 export default function Home() {
   return (
     <>
-      <ToastContainer />
-      <Hero />
-      <InspireButton />
+      {/* <ToastContainer /> */}
+      {/* <Hero /> */}
+      {/* <InspireButton /> */}
       {/* <Features />
       <FeaturesBlocks />
       <Testimonials />

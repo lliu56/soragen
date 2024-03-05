@@ -13,7 +13,7 @@ const useSoraCreation = async (
 
     // TODO - Sora API call
     console.log (files, brandName, selectedTags, customPrompts)
-
+    // return the video
 }
 
 export default useSoraCreation;

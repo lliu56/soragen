@@ -1,9 +1,15 @@
 "use client";
+import { CreationLabContext } from "@/contexts/creation-lab-context";
 import React from "react";
-import { useState } from "react";
+import { useContext } from "react";
 
 function CustomPromptBox() {
-  const [customPrompts, setCustomPrompts] = useState<string>("");
+  const context = useContext(CreationLabContext);
+
+  if (!context) {
+    throw new Error("ImgVidInput must be used within a CreationLabProvider");
+  }
+  const { customPrompts, setCustomPrompts } = context;
 
   const handleChange = (e: any) => {
     e.preventDefault();

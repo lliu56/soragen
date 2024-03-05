@@ -1,15 +1,21 @@
 "use client";
-import React from "react";
-import Dropzone, { FileWithPath } from "react-dropzone";
-import { useState } from "react";
+import React, { useState, useContext } from "react";
+import { CreationLabContext } from "@/contexts/creation-lab-context";
+import Dropzone from "react-dropzone";
 
-interface PreviewFileProps extends FileWithPath {
+interface FileObjectProps {
+  name: string;
   preview: string;
 }
 
 // TODO: need to build the display functionality
 const ImgVidInput: React.FC = () => {
-  const [files, setFiles] = useState<PreviewFileProps[]>([]);
+  const context = useContext(CreationLabContext);
+
+  if (!context) {
+    throw new Error("ImgVidInput must be used within a CreationLabProvider");
+  }
+  const { files, setFiles } = context;
 
   const handleDrop = (acceptedFiles: File[]) => {
     const mappedFiles = acceptedFiles.map((file) =>
@@ -21,13 +27,18 @@ const ImgVidInput: React.FC = () => {
   };
 
   const removeFile = (fileName: string) => {
-    const newFiles = files.filter((file) => file.name !== fileName);
+    const newFiles = files.filter(
+      (file: { name: string }) => file.name !== fileName
+    );
     setFiles(newFiles);
   };
 
   // Cleanup preview URLs to prevent memory leaks
   React.useEffect(() => {
-    return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
+    return () =>
+      files.forEach((file: FileObjectProps) =>
+        URL.revokeObjectURL(file.preview)
+      );
   }, [files]);
 
   return (
@@ -56,7 +67,7 @@ const ImgVidInput: React.FC = () => {
         {/* preview display */}
         <aside>
           <ul>
-            {files.map((file) => (
+            {files.map((file: FileObjectProps) => (
               <li
                 key={file.name}
                 className="flex justify-between items-center my-2"

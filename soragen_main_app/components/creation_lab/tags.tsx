@@ -1,21 +1,15 @@
 "use client";
-import React from "react";
+import { CreationLabContext } from "@/contexts/creation-lab-context";
+import React, { useContext } from "react";
 
 function PresetTags() {
-  const initalTagOptions = [
-    "cinematic",
-    "modern & sleek",
-    "dark",
-    "vitage",
-    "historical drama",
-    "bold",
-    "aesthethic",
-    "minimalist",
-  ];
+  const context = useContext(CreationLabContext);
 
-  const [tagOptions, setTagOptions] =
-    React.useState<string[]>(initalTagOptions);
-  const [selectedTags, setSelectedTags] = React.useState<string[]>([]);
+  if (!context) {
+    throw new Error("ImgVidInput must be used within a CreationLabProvider");
+  }
+  const { tagOptions, setTagOptions } = context;
+  const { selectedTags, setSelectedTags } = context;
 
   const handleClick = (tag: string) => {
     setSelectedTags([...selectedTags, tag]);
